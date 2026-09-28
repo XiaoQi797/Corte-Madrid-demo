@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corte Madrid — Modern Barber Shop in Madrid</title>
-  <meta name="description" content="Modern barber shop in central Madrid. Walk-ins welcome, booking available. Sharp cuts, skin fades, and beard work.">
+  <title>Corte Madrid — Barbería moderna en Madrid</title>
+  <meta name="description" content="Barbería moderna en el centro de Madrid. Atendemos sin cita, reservas disponibles. Cortes, degradados y barba.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -132,6 +132,9 @@
       font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
       letter-spacing: -0.01em;
     }
+    .nav-right {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
     .nav-links { display: none; gap: 2rem; }
     .nav-links a {
       font-size: 0.875rem; font-weight: 500; color: var(--text-sec);
@@ -159,340 +162,297 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* Mobile menu */
+    /* ===== LANGUAGE SELECTOR (desktop) ===== */
+    .lang-selector {
+      position: relative;
+      display: none;
+    }
+    .lang-btn {
+      background: none;
+      border: 1.5px solid var(--border);
+      padding: 0.3rem 0.6rem;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-sec);
+      cursor: pointer;
+      display: flex; align-items: center; gap: 0.25rem;
+      min-height: 32px;
+      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .lang-btn:hover { border-color: var(--text); color: var(--text); }
+    .lang-arrow { font-size: 0.65rem; }
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      min-width: 110px;
+      z-index: 110;
+    }
+    .lang-dropdown[hidden] { display: none; }
+    .lang-option {
+      display: block; width: 100%;
+      padding: 0.55rem 0.85rem;
+      background: none; border: none;
+      font-family: var(--font-body); font-size: 0.85rem;
+      text-align: left; cursor: pointer;
+      color: var(--text-sec);
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-option:hover { background: var(--bg); color: var(--text); }
+    .lang-option[aria-current="true"] { color: var(--accent); font-weight: 600; }
+
+    /* ===== LANGUAGE SELECTOR (mobile) ===== */
+    .mobile-lang {
+      display: flex; gap: 0.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+    }
+    .mobile-lang-btn {
+      padding: 0.5rem 1rem;
+      background: none;
+      border: 1.5px solid var(--border);
+      font-family: var(--font-display);
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--text-sec);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .mobile-lang-btn:hover { border-color: var(--text); }
+    .mobile-lang-btn[aria-current="true"] {
+      border-color: var(--accent); color: var(--accent);
+    }
+
+    /* ===== MOBILE MENU ===== */
     .mobile-menu {
-      display: none; position: fixed;
-      top: var(--nav-h); left: 0; width: 100%;
-      height: calc(100dvh - var(--nav-h));
-      background: var(--bg); z-index: 99;
-      flex-direction: column; align-items: flex-start;
-      padding: 2.5rem 1.5rem; gap: 1.75rem;
+      display: none;
+      position: fixed; top: var(--nav-h); left: 0; width: 100%;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      padding: 1.5rem 1.25rem 2rem;
+      gap: 0.25rem;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
-      font-family: var(--font-display); font-size: 1.4rem; font-weight: 600;
-      color: var(--text); transition: color 0.2s;
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 600;
+      padding: 0.75rem 0; display: block;
+      min-height: 48px;
+      display: flex; align-items: center;
     }
-    .mobile-menu a:hover { color: var(--accent); }
-    .mobile-menu .btn { width: 100%; margin-top: auto; }
+    .mobile-menu .mobile-menu-cta {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 1rem;
+    }
 
     @media (min-width: 768px) {
+      .nav-toggle { display: none; }
       .nav-links { display: flex; }
       .nav-cta { display: inline-flex; }
-      .nav-toggle { display: none; }
+      .lang-selector { display: block; }
       .mobile-menu { display: none !important; }
     }
 
     /* ===== HERO ===== */
-    .hero { padding-top: var(--nav-h); }
-    .hero-inner { display: flex; flex-direction: column; }
-    .hero-text {
-      padding: 2.5rem 1.25rem 2rem;
-      display: flex; flex-direction: column; justify-content: center;
+    .hero {
+      padding-top: calc(var(--nav-h) + 2rem);
+      padding-bottom: 3rem;
     }
-    .hero-headline {
+    .hero-grid {
+      display: grid; gap: 2rem;
+    }
+    .hero-text { order: 1; }
+    .hero-image { order: 2; }
+
+    .hero-heading {
       font-family: var(--font-display); font-weight: 700;
-      font-size: clamp(2.25rem, 7vw, 3.75rem);
-      line-height: 1.08; letter-spacing: -0.025em;
-      margin-bottom: 1.25rem;
+      font-size: clamp(2rem, 6vw, 3.25rem);
+      line-height: 1.1; letter-spacing: -0.025em;
     }
     .hero-sub {
-      font-size: 1.05rem; color: var(--text-sec);
-      max-width: 420px; margin-bottom: 2rem; line-height: 1.6;
+      margin-top: 1rem; color: var(--text-sec);
+      font-size: 1.05rem; line-height: 1.6;
+      max-width: 440px;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .hero-img {
-      width: 100%; height: 56vw; max-height: 420px;
-      overflow: hidden; background: var(--border);
+    .hero-btns {
+      margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;
     }
-    .hero-img img {
-      width: 100%; height: 100%; object-fit: cover;
+    .hero-image img {
+      width: 100%; height: 280px; object-fit: cover;
     }
 
     @media (min-width: 768px) {
-      .hero-inner { flex-direction: row; min-height: 85vh; }
-      .hero-text { flex: 1 1 50%; padding: 4rem 3rem 4rem 1.25rem; }
-      .hero-img { flex: 1 1 50%; height: auto; max-height: none; }
+      .hero { padding-top: calc(var(--nav-h) + 4rem); padding-bottom: 4rem; }
+      .hero-grid {
+        grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+      }
+      .hero-text { order: 1; }
+      .hero-image { order: 2; }
+      .hero-image img { height: 420px; }
     }
-
-    @media (max-width: 420px) {
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { width: 100%; }
+    @media (max-width: 400px) {
+      .hero-btns { flex-direction: column; }
+      .hero-btns .btn { width: 100%; }
     }
 
     /* ===== SERVICES ===== */
-    .services { padding: 5rem 0 4rem; }
+    .services { padding: 4rem 0; }
     .services-header { margin-bottom: 2.5rem; }
-    .service-list { border-top: 1.5px solid var(--text); }
+    .services-list {
+      display: flex; flex-direction: column;
+      border-top: 2px solid var(--text);
+    }
     .service-item {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 0.15rem 1rem; padding: 1.25rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.25rem 1rem;
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--border);
       align-items: start;
     }
     .service-name {
-      font-family: var(--font-display); font-weight: 600; font-size: 1.05rem;
+      font-family: var(--font-display); font-weight: 600; font-size: 1.1rem;
     }
     .service-price {
-      font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
-      color: var(--accent); text-align: right;
+      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      text-align: right; grid-row: 1 / 3;
+      align-self: center;
     }
-    .service-meta {
-      grid-column: 1 / -1; color: var(--text-sec); font-size: 0.88rem;
-      margin-top: 0.15rem;
+    .service-detail {
+      color: var(--text-sec); font-size: 0.88rem;
+      grid-column: 1;
     }
 
     /* ===== GALLERY ===== */
     .gallery { padding: 4rem 0; }
     .gallery-header { margin-bottom: 2rem; }
     .gallery-grid {
-      display: grid; grid-template-columns: 1fr;
-      gap: 0.75rem;
+      display: grid; gap: 0.75rem;
+      grid-template-columns: 1fr 1fr;
     }
     .gallery-item {
       position: relative; overflow: hidden;
-      background: var(--border); aspect-ratio: 4/3;
+      background: var(--border);
     }
     .gallery-item img {
       width: 100%; height: 100%; object-fit: cover;
+      aspect-ratio: 4/3;
       transition: transform 0.4s ease;
     }
-    .gallery-item:hover img,
-    .gallery-item:focus-within img { transform: scale(1.03); }
+    .gallery-item:hover img { transform: scale(1.03); }
     .gallery-item figcaption {
       position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 2rem 0.75rem 0.6rem;
+      padding: 0.5rem 0.75rem;
       background: linear-gradient(transparent, rgba(0,0,0,0.55));
       color: #fff; font-size: 0.8rem; font-weight: 500;
     }
-
+    .gallery-item:first-child {
+      grid-column: 1 / -1;
+    }
     @media (min-width: 640px) {
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-item:first-child { grid-row: span 2; aspect-ratio: auto; }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-item:first-child {
+        grid-column: 1 / 2; grid-row: 1 / 3;
+      }
+      .gallery-item:first-child img { aspect-ratio: auto; height: 100%; }
     }
 
     /* ===== ABOUT ===== */
-    .about { padding: 5rem 0; }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr;
-      gap: 2.5rem;
+    .about { padding: 4rem 0; }
+    .about-grid { display: grid; gap: 2.5rem; }
+    .about-image img {
+      width: 100%; height: 300px; object-fit: cover;
     }
-    .about-img-wrap { position: relative; }
-    .about-img-wrap::before {
-      content: ''; position: absolute;
-      bottom: -0.75rem; left: -0.75rem;
-      width: 50%; height: 50%;
-      background: var(--accent); opacity: 0.08;
+    .about-heading {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      line-height: 1.2; letter-spacing: -0.015em;
     }
-    .about-img-wrap img {
-      width: 100%; aspect-ratio: 4/5; object-fit: cover;
-      position: relative;
+    .about-text {
+      margin-top: 1rem; color: var(--text-sec); line-height: 1.7;
     }
-    .about-text { display: flex; flex-direction: column; justify-content: center; }
-    .about-text p { color: var(--text-sec); margin-top: 1rem; max-width: 480px; }
     .about-values {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1.25rem; margin-top: 2rem;
+      margin-top: 1.5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
     }
-    .about-value-title {
-      font-family: var(--font-display); font-weight: 600;
-      font-size: 0.95rem; margin-bottom: 0.2rem;
+    .about-value-label {
+      font-family: var(--font-display); font-weight: 600; font-size: 0.9rem;
     }
-    .about-value-desc { font-size: 0.85rem; color: var(--text-sec); }
+    .about-value-desc { color: var(--text-sec); font-size: 0.85rem; }
 
     @media (min-width: 768px) {
-      .about-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+      .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+      .about-image img { height: 100%; min-height: 380px; }
     }
 
-    /* ===== INFO (Hours + Location) ===== */
-    .info { padding: 4rem 0 5rem; }
-    .info-grid {
-      display: grid; grid-template-columns: 1fr;
-      gap: 1.5rem;
+    /* ===== VISIT ===== */
+    .visit { padding: 4rem 0; }
+    .visit-grid {
+      display: grid; gap: 1.5rem;
     }
-    .info-card {
+    .visit-card {
       background: var(--surface); padding: 2rem;
       border: 1px solid var(--border);
     }
-    .info-card-title {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 1.15rem; margin-bottom: 1.25rem;
+    .visit-card-title {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
+      margin-bottom: 1.25rem;
     }
-    .hours-list { display: flex; flex-direction: column; gap: 0.6rem; }
     .hours-row {
-      display: flex; justify-content: space-between; align-items: baseline;
+      display: flex; justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
       font-size: 0.95rem;
     }
-    .hours-row dt { color: var(--text-sec); }
-    .hours-row dd { font-weight: 600; }
-    .hours-row.closed dd { color: var(--accent); }
-
-    .location-area {
-      font-family: var(--font-display); font-weight: 600;
-      font-size: 1.05rem; margin-bottom: 0.5rem;
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { font-weight: 500; }
+    .hours-time { color: var(--text-sec); }
+    .location-text {
+      color: var(--text-sec); line-height: 1.7; font-size: 0.95rem;
     }
-    .location-desc { font-size: 0.92rem; color: var(--text-sec); line-height: 1.6; }
+    .location-note {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border: 1px dashed var(--border);
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+    .location-note strong { color: var(--text); }
 
     @media (min-width: 640px) {
-      .info-grid { grid-template-columns: 1fr 1fr; }
+      .visit-grid { grid-template-columns: 1fr 1fr; }
     }
 
     /* ===== CTA ===== */
     .cta {
-      padding: 5rem 0;
-      background: var(--bg-dark); color: var(--text-inv);
+      padding: 4rem 0;
       text-align: center;
     }
-    .cta .section-heading { color: var(--text-inv); }
-    .cta .section-desc {
-      color: rgba(240,237,232,0.7);
-      margin: 0.75rem auto 2rem; max-width: 440px;
-    }
-    .cta-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
-
-    /* ===== MODAL ===== */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(27, 27, 27, 0.5);
-      display: flex; align-items: center; justify-content: center;
-      padding: 1rem;
-    }
-    .modal-overlay[hidden] { display: none; }
-
-    .modal-panel {
-      background: var(--surface);
-      width: 100%; max-width: 480px;
-      max-height: 90vh; overflow-y: auto;
-      position: relative; padding: 0;
-    }
-
-    .modal-demo-bar {
-      background: var(--bg); color: var(--text-sec);
-      font-size: 0.78rem; text-align: center;
-      padding: 0.5rem 1rem; letter-spacing: 0.01em;
-    }
-    .modal-body { padding: 1.75rem 1.5rem 1.5rem; }
-
-    .modal-close {
-      position: absolute; top: 2.25rem; right: 0.75rem;
-      background: none; border: none;
-      font-size: 1.5rem; color: var(--text-sec);
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--text); }
-
-    .modal-title {
+    .cta-heading {
       font-family: var(--font-display); font-weight: 700;
-      font-size: 1.3rem; margin-bottom: 1.25rem;
-      letter-spacing: -0.01em;
-      outline: none;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      line-height: 1.15; letter-spacing: -0.02em;
     }
-
-    .modal-label {
-      display: block; font-weight: 600; font-size: 0.88rem;
-      margin-bottom: 0.5rem; color: var(--text-sec);
+    .cta-sub {
+      margin-top: 0.75rem; color: var(--text-sec);
+      max-width: 420px; margin-left: auto; margin-right: auto;
     }
-
-    /* Service options in modal */
-    .service-options {
-      display: flex; flex-direction: column; gap: 0.5rem;
-      margin-bottom: 1.5rem;
+    .cta-btns {
+      margin-top: 1.5rem;
+      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
     }
-    .service-option {
-      display: flex; align-items: center; gap: 0.75rem;
-      width: 100%; padding: 0.9rem 1rem;
-      background: var(--bg); border: 1.5px solid transparent;
-      font-family: var(--font-body); font-size: 0.95rem;
-      text-align: left; transition: border-color 0.2s, background 0.2s;
-      min-height: 48px; cursor: pointer;
-    }
-    .service-option:hover { border-color: var(--border); }
-    .service-option[aria-checked="true"] {
-      border-color: var(--accent); background: rgba(194, 77, 43, 0.06);
-    }
-    .service-option .so-name { font-weight: 600; flex: 1; }
-    .service-option .so-detail { color: var(--text-sec); font-size: 0.85rem; }
-    .service-option .so-price {
-      font-family: var(--font-display); font-weight: 700;
-      color: var(--accent);
-    }
-
-    /* Date input */
-    .modal-date-input {
-      width: 100%; padding: 0.7rem 0.75rem;
-      border: 1.5px solid var(--border);
-      font-family: var(--font-body); font-size: 0.95rem;
-      background: var(--surface); color: var(--text);
-      min-height: 48px; margin-bottom: 1rem;
-    }
-    .modal-date-input:focus {
-      outline: none; border-color: var(--accent);
-    }
-
-    .modal-error {
-      color: var(--accent); font-size: 0.88rem;
-      font-weight: 500; margin-bottom: 1rem;
-      padding: 0.5rem 0;
-    }
-    .modal-error[hidden] { display: none; }
-
-    /* Time grid */
-    .time-slots-wrap { margin-bottom: 1.5rem; }
-    .time-slots-wrap[hidden] { display: none; }
-    .time-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0.4rem; margin-top: 0.5rem;
-    }
-    .time-slot {
-      padding: 0.6rem 0.25rem;
-      border: 1.5px solid var(--border); background: var(--surface);
-      font-family: var(--font-display); font-size: 0.9rem; font-weight: 500;
-      text-align: center; cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      min-height: 44px; display: flex; align-items: center; justify-content: center;
-    }
-    .time-slot:hover { border-color: var(--text-sec); }
-    .time-slot[aria-checked="true"] {
-      border-color: var(--accent); background: var(--accent); color: #fff;
-    }
-
-    @media (max-width: 380px) {
-      .time-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    /* Summary */
-    .summary-card {
-      background: var(--bg); padding: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
-    .summary-row {
-      display: flex; justify-content: space-between;
-      padding: 0.4rem 0; font-size: 0.92rem;
-    }
-    .summary-row + .summary-row { border-top: 1px solid var(--border); }
-    .summary-label { color: var(--text-sec); }
-    .summary-value { font-weight: 600; }
-    .summary-total { margin-top: 0.25rem; }
-    .summary-total .summary-value {
-      color: var(--accent); font-family: var(--font-display); font-size: 1.05rem;
-    }
-
-    .summary-demo-note {
-      font-size: 0.85rem; color: var(--text-sec);
-      font-style: italic; margin-bottom: 1.5rem;
-      line-height: 1.55;
-    }
-
-    /* Modal actions */
-    .modal-actions {
-      display: flex; gap: 0.75rem; justify-content: flex-end;
-    }
-    .modal-actions .btn { flex: 0 0 auto; }
-    .modal-actions .btn-primary { min-width: 100px; }
 
     /* ===== FOOTER ===== */
     .footer {
@@ -500,179 +460,331 @@
       border-top: 1px solid var(--border);
     }
     .footer-inner {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 0.75rem; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      text-align: center;
     }
     .footer-logo {
-      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      font-family: var(--font-display); font-weight: 700; font-size: 1rem;
     }
-    .footer-copy { font-size: 0.8rem; color: var(--text-sec); }
+    .footer-copy { font-size: 0.82rem; color: var(--text-sec); }
     .footer-demo {
-      font-size: 0.78rem; color: var(--text-sec);
-      font-style: italic; max-width: 400px; line-height: 1.5;
+      font-size: 0.78rem; color: var(--text-sec); font-style: italic;
+      max-width: 400px;
     }
 
-    /* ===== PROGRESSIVE REVEAL (JS-enhanced only) ===== */
-    .js-ready .reveal {
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(27,27,27,0.5);
+      z-index: 200;
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-panel {
+      background: var(--surface);
+      width: 100%; max-width: 440px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-demo-bar {
+      background: var(--bg-dark); color: var(--text-inv);
+      font-size: 0.75rem; padding: 0.5rem 1.25rem;
+      text-align: center;
+    }
+    .modal-body { padding: 1.75rem 1.5rem 1.5rem; }
+    .modal-close {
+      position: absolute; top: 2.25rem; right: 1rem;
+      background: none; border: none; font-size: 1.4rem;
+      color: var(--text-sec); cursor: pointer;
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { color: var(--text); }
+
+    .modal-step { display: none; }
+    .modal-step.active { display: block; }
+    .modal-step-title {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
+      margin-bottom: 1.25rem; outline: none;
+    }
+
+    /* Service options */
+    .service-options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .service-opt {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border);
+      background: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.2s, background 0.2s;
+      min-height: 48px;
+      text-align: left;
+      width: 100%;
+    }
+    .service-opt:hover { border-color: var(--text); }
+    .service-opt[aria-checked="true"] {
+      border-color: var(--accent); background: rgba(194,77,43,0.06);
+    }
+    .service-opt-name { font-weight: 600; }
+    .service-opt-price { color: var(--text-sec); white-space: nowrap; }
+    .service-opt-duration { font-size: 0.82rem; color: var(--text-sec); }
+
+    /* Date / time */
+    .date-input {
+      width: 100%; padding: 0.75rem;
+      font-family: var(--font-body); font-size: 0.95rem;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      min-height: 48px;
+    }
+    .date-input:focus { border-color: var(--accent); outline: none; }
+
+    .time-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .time-slot {
+      padding: 0.6rem;
+      border: 1.5px solid var(--border);
+      background: none;
+      font-family: var(--font-body); font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      min-height: 44px;
+      text-align: center;
+    }
+    .time-slot:hover { border-color: var(--text); }
+    .time-slot[aria-checked="true"] {
+      border-color: var(--accent); background: rgba(194,77,43,0.06);
+    }
+    .time-slot[aria-disabled="true"] {
+      opacity: 0.35; cursor: not-allowed;
+      border-color: var(--border); background: none;
+    }
+
+    .time-msg {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 1rem;
+      color: var(--text-sec);
+      font-size: 0.9rem;
+    }
+
+    .modal-nav {
+      display: flex; gap: 0.75rem; margin-top: 1.5rem;
+    }
+    .modal-nav .btn { flex: 1; }
+
+    /* Confirmation */
+    .confirm-block { margin-bottom: 1.5rem; }
+    .confirm-label {
+      font-size: 0.8rem; color: var(--text-sec);
+      margin-bottom: 0.25rem;
+    }
+    .confirm-value {
+      font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+    }
+    .confirm-notice {
+      padding: 1rem;
+      background: var(--bg);
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+
+    /* ===== REVEAL (progressive enhancement) ===== */
+    html.js-ready .reveal {
       opacity: 0; transform: translateY(24px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .js-ready .reveal.visible {
+    html.js-ready .reveal.visible {
       opacity: 1; transform: translateY(0);
     }
   </style>
 </head>
-<body id="top">
+<body>
+  <a href="#main-content" class="skip-link" data-i18n="skipLink">Saltar al contenido</a>
 
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- ===== NAVIGATION ===== -->
-  <header class="nav">
+  <!-- ===== NAV ===== -->
+  <header class="nav" role="banner">
     <div class="container nav-inner">
-      <a href="#top" class="nav-logo" aria-label="Corte Madrid — back to top">Corte Madrid</a>
-      <nav aria-label="Main navigation">
-        <ul class="nav-links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#visit">Visit</a></li>
-        </ul>
+      <a href="#top" class="nav-logo" aria-label="Corte Madrid — Inicio">Corte Madrid</a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#servicios" data-i18n="navServices">Servicios</a>
+        <a href="#galeria" data-i18n="navGallery">Galería</a>
+        <a href="#nosotros" data-i18n="navAbout">Nosotros</a>
+        <a href="#visita" data-i18n="navVisit">Visita</a>
       </nav>
-      <button class="btn btn-primary nav-cta" data-action="open-booking">Book Ahead</button>
-      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
-      <a href="#visit">Visit</a>
-      <button class="btn btn-primary" data-action="open-booking">Book Ahead</button>
-    </nav>
-  </header>
 
-  <main id="main-content">
-
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-text container">
-          <h1 class="hero-headline">Sharp cuts.<br>No queue.<br>No fuss.</h1>
-          <p class="hero-sub">A modern barber shop in central Madrid. Walk in anytime, or book ahead to skip the wait.</p>
-          <div class="hero-actions">
-            <button class="btn btn-primary" data-action="open-booking">Book Ahead</button>
-            <a href="#services" class="btn btn-outline">See Services</a>
+      <div class="nav-right">
+        <!-- Language selector (desktop) -->
+        <div class="lang-selector">
+          <button class="lang-btn" aria-expanded="false" aria-haspopup="true" aria-label="Idioma" id="lang-toggle">
+            <span id="lang-current">ES</span>
+            <span class="lang-arrow" aria-hidden="true">▾</span>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown" hidden>
+            <button class="lang-option" data-lang="es" aria-current="true">Español</button>
+            <button class="lang-option" data-lang="en">English</button>
+            <button class="lang-option" data-lang="zh">中文</button>
           </div>
         </div>
-        <div class="hero-img">
-          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
-               alt="Interior of a modern barber shop with leather chairs and warm lighting"
-               width="900" height="600"
-               fetchpriority="high">
+
+        <button class="btn btn-primary nav-cta modal-trigger" data-i18n="navCta">Probar demo de reserva</button>
+
+        <button class="nav-toggle" id="nav-toggle"
+                aria-expanded="false" aria-controls="mobile-menu"
+                aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="#servicios" class="mobile-link" data-i18n="navServices">Servicios</a>
+    <a href="#galeria" class="mobile-link" data-i18n="navGallery">Galería</a>
+    <a href="#nosotros" class="mobile-link" data-i18n="navAbout">Nosotros</a>
+    <a href="#visita" class="mobile-link" data-i18n="navVisit">Visita</a>
+    <button class="btn btn-primary mobile-menu-cta modal-trigger" data-i18n="navCta">Probar demo de reserva</button>
+
+    <!-- Language selector (mobile) -->
+    <div class="mobile-lang">
+      <button class="mobile-lang-btn" data-lang="es" aria-current="true">ES</button>
+      <button class="mobile-lang-btn" data-lang="en">EN</button>
+      <button class="mobile-lang-btn" data-lang="zh">中文</button>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text reveal">
+            <h1 class="hero-heading" data-i18n-html="heroHeading">Cortes precisos.<br>Sin esperas. Sin complicaciones.</h1>
+            <p class="hero-sub" data-i18n="heroSub">Barbería moderna en Madrid. Atendemos sin cita previa — también puedes reservar para horas de mayor afluencia.</p>
+            <div class="hero-btns">
+              <button class="btn btn-primary modal-trigger" data-i18n="heroCta">Probar demo de reserva</button>
+              <a href="#servicios" class="btn btn-outline" data-i18n="heroSecondary">Ver servicios y precios</a>
+            </div>
+          </div>
+          <div class="hero-image reveal">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
+                 alt="Barbero realizando un corte degradado con precisión"
+                 data-i18n-alt="altHero"
+                 width="900" height="600" fetchpriority="high">
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===== SERVICES ===== -->
-    <section id="services" class="services">
-      <div class="container reveal">
-        <header class="services-header">
-          <span class="section-tag">Services</span>
-          <h2 class="section-heading">What we do, what it costs</h2>
-          <p class="section-desc">Four services, done well. Walk-ins are always welcome. Booking ahead saves you waiting during peak hours.</p>
-        </header>
-        <div class="service-list">
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="services-header reveal">
+          <span class="section-tag" data-i18n="servicesTag">Servicios</span>
+          <h2 class="section-heading" data-i18n="servicesHeading">Qué hacemos y cuánto cuesta</h2>
+          <p class="section-desc" data-i18n="servicesDesc">Cuatro servicios, precios claros. Sin cita previa o con reserva — tú decides.</p>
+        </div>
+        <div class="services-list reveal">
           <article class="service-item">
-            <h3 class="service-name">Classic Cut</h3>
-            <span class="service-price" aria-label="18 euros">€18</span>
-            <p class="service-meta">Consultation, wash, scissor or clipper cut, styled finish. 30 min.</p>
+            <h3 class="service-name" data-i18n="s1Name">Corte Clásico</h3>
+            <span class="service-price" aria-label="18 euros" data-i18n-label="s1PriceLabel">€18</span>
+            <p class="service-detail" data-i18n="s1Detail">Corte completo con tijera o máquina, consulta de estilo incluida. 30 min.</p>
           </article>
           <article class="service-item">
-            <h3 class="service-name">Skin Fade</h3>
-            <span class="service-price" aria-label="22 euros">€22</span>
-            <p class="service-meta">Precision fade from skin, blended to your length on top. 30 min.</p>
+            <h3 class="service-name" data-i18n="s2Name">Degradado Skin Fade</h3>
+            <span class="service-price" aria-label="22 euros" data-i18n-label="s2PriceLabel">€22</span>
+            <p class="service-detail" data-i18n="s2Detail">Degradado completo con detalle en contornos y líneas. 30 min.</p>
           </article>
           <article class="service-item">
-            <h3 class="service-name">Beard Trim</h3>
-            <span class="service-price" aria-label="12 euros">€12</span>
-            <p class="service-meta">Shape, line-up, and hot towel finish. 20 min.</p>
+            <h3 class="service-name" data-i18n="s3Name">Arreglo de Barba</h3>
+            <span class="service-price" aria-label="12 euros" data-i18n-label="s3PriceLabel">€12</span>
+            <p class="service-detail" data-i18n="s3Detail">Perfilado con navaja, recorte y forma. 20 min.</p>
           </article>
           <article class="service-item">
-            <h3 class="service-name">Cut + Beard</h3>
-            <span class="service-price" aria-label="28 euros">€28</span>
-            <p class="service-meta">Full haircut and beard service in one sitting. 45 min.</p>
+            <h3 class="service-name" data-i18n="s4Name">Corte + Barba</h3>
+            <span class="service-price" aria-label="28 euros" data-i18n-label="s4PriceLabel">€28</span>
+            <p class="service-detail" data-i18n="s4Detail">Servicio completo: corte y arreglo de barba en una sesión. 45 min.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ===== GALLERY ===== -->
-    <section id="gallery" class="gallery">
-      <div class="container reveal">
-        <header class="gallery-header">
-          <span class="section-tag">Gallery</span>
-          <h2 class="section-heading">The work</h2>
-        </header>
-        <div class="gallery-grid">
+    <section class="gallery" id="galeria">
+      <div class="container">
+        <div class="gallery-header reveal">
+          <span class="section-tag" data-i18n="galleryTag">Galería</span>
+          <h2 class="section-heading" data-i18n="galleryHeading">Nuestro trabajo</h2>
+        </div>
+        <div class="gallery-grid reveal">
           <figure class="gallery-item">
             <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80"
-                 alt="Clean skin fade haircut, side profile" width="600" height="400" loading="lazy">
-            <figcaption>Skin fade</figcaption>
+                 data-i18n-alt="altGal1" alt="Degradado limpio con línea definida" width="600" height="400" loading="lazy">
+            <figcaption data-i18n="galCap1">Degradado limpio</figcaption>
           </figure>
           <figure class="gallery-item">
             <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80"
-                 alt="Barber tools arranged on a leather surface" width="600" height="400" loading="lazy">
-            <figcaption>Tools of the trade</figcaption>
+                 data-i18n-alt="altGal2" alt="Corte clásico con tijera y peine" width="600" height="400" loading="lazy">
+            <figcaption data-i18n="galCap2">Corte con tijera</figcaption>
           </figure>
           <figure class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80"
-                 alt="Barber working on a precise haircut" width="600" height="400" loading="lazy">
-            <figcaption>Precision work</figcaption>
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80"
+                 data-i18n-alt="altGal3" alt="Barbero trabajando en un corte preciso" width="600" height="400" loading="lazy">
+            <figcaption data-i18n="galCap3">Trabajo de precisión</figcaption>
           </figure>
           <figure class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?auto=format&fit=crop&w=600&q=80"
-                 alt="Detail of a textured crop haircut" width="600" height="400" loading="lazy">
-            <figcaption>Textured crop</figcaption>
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+                 data-i18n-alt="altGal4" alt="Hombre con barba bien arreglada y corte moderno" width="600" height="400" loading="lazy">
+            <figcaption data-i18n="galCap4">Crop texturizado</figcaption>
           </figure>
           <figure class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1521590832167-7b76f4994ab1?auto=format&fit=crop&w=600&q=80"
-                 alt="Modern barbershop interior with clean design" width="600" height="400" loading="lazy">
-            <figcaption>The shop</figcaption>
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"
+                 data-i18n-alt="altGal5" alt="Retrato de hombre joven con estilo cuidado" width="600" height="400" loading="lazy">
+            <figcaption data-i18n="galCap5">La barbería</figcaption>
           </figure>
         </div>
       </div>
     </section>
 
     <!-- ===== ABOUT ===== -->
-    <section id="about" class="about">
+    <section class="about" id="nosotros">
       <div class="container">
-        <div class="about-grid reveal">
-          <div class="about-img-wrap">
-            <img src="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?auto=format&fit=crop&w=600&q=80"
-                 alt="Barber at work in the shop" width="600" height="750" loading="lazy">
+        <div class="about-grid">
+          <div class="about-image reveal">
+            <img src="https://images.unsplash.com/photo-1567894340315-735d7c361db0?auto=format&fit=crop&w=600&q=80"
+                 data-i18n-alt="altAbout" alt="Barbero trabajando en un corte moderno" width="600" height="400" loading="lazy">
           </div>
-          <div class="about-text">
-            <span class="section-tag">About</span>
-            <h2 class="section-heading">A barber shop, not a brand experience</h2>
-            <p>Corte Madrid does four things and does them well. We cut hair, shape beards, price honestly, and don't waste your time.</p>
-            <p>Walk-ins are welcome every day we're open. If you'd rather guarantee your spot — especially during after-work hours — book ahead. Either way, you'll get the same sharp result.</p>
+          <div class="about-content reveal">
+            <span class="section-tag" data-i18n="aboutTag">Nosotros</span>
+            <h2 class="about-heading" data-i18n="aboutHeading">Una barbería, no una marca de estilo de vida</h2>
+            <p class="about-text" data-i18n="aboutText">Corte Madrid nació de una idea sencilla: hacer bien cuatro cosas, cobrar un precio justo y no hacer perder el tiempo a nadie. Sin cita previa — si quieres asegurarte sitio en horas punta, puedes reservar.</p>
             <div class="about-values">
               <div>
-                <p class="about-value-title">Honest pricing</p>
-                <p class="about-value-desc">What you see is what you pay. No upsells, no hidden costs.</p>
+                <p class="about-value-label" data-i18n="val1Label">4 servicios</p>
+                <p class="about-value-desc" data-i18n="val1Desc">Enfocados, no infinitos</p>
               </div>
               <div>
-                <p class="about-value-title">Walk-ins or bookings</p>
-                <p class="about-value-desc">Your choice. Walk in anytime or book ahead for busy hours.</p>
+                <p class="about-value-label" data-i18n="val2Label">Precios claros</p>
+                <p class="about-value-desc" data-i18n="val2Desc">Lo que ves es lo que pagas</p>
               </div>
               <div>
-                <p class="about-value-title">Focused menu</p>
-                <p class="about-value-desc">Four services, executed consistently. No filler treatments.</p>
+                <p class="about-value-label" data-i18n="val3Label">Sin cita</p>
+                <p class="about-value-desc" data-i18n="val3Desc">Ven cuando quieras</p>
               </div>
               <div>
-                <p class="about-value-title">30 min or less</p>
-                <p class="about-value-desc">Most cuts are done in half an hour. Cut + Beard takes 45.</p>
+                <p class="about-value-label" data-i18n="val4Label">Reservas disponibles</p>
+                <p class="about-value-desc" data-i18n="val4Desc">Para horas de más afluencia</p>
               </div>
             </div>
           </div>
@@ -681,389 +793,470 @@
     </section>
 
     <!-- ===== VISIT ===== -->
-    <section id="visit" class="info">
+    <section class="visit" id="visita">
       <div class="container">
-        <h2 class="sr-only">Visit us</h2>
-        <div class="info-grid reveal">
-          <div class="info-card">
-            <h3 class="info-card-title">Hours</h3>
-            <dl class="hours-list">
-              <div class="hours-row">
-                <dt>Monday – Friday</dt>
-                <dd>10:00 – 20:00</dd>
-              </div>
-              <div class="hours-row">
-                <dt>Saturday</dt>
-                <dd>10:00 – 20:00</dd>
-              </div>
-              <div class="hours-row closed">
-                <dt>Sunday</dt>
-                <dd>Closed</dd>
-              </div>
-            </dl>
+        <h2 class="sr-only" data-i18n="visitSrTitle">Visítanos</h2>
+        <div class="visit-grid reveal">
+          <div class="visit-card">
+            <h3 class="visit-card-title" data-i18n="hoursTitle">Horario</h3>
+            <div class="hours-row"><span class="hours-day" data-i18n="hoursMF">Lunes — Viernes</span><span class="hours-time">10:00 – 20:00</span></div>
+            <div class="hours-row"><span class="hours-day" data-i18n="hoursSat">Sábado</span><span class="hours-time">10:00 – 20:00</span></div>
+            <div class="hours-row"><span class="hours-day" data-i18n="hoursSun">Domingo</span><span class="hours-time" data-i18n="hoursClosed">Cerrado</span></div>
           </div>
-          <div class="info-card">
-            <h3 class="info-card-title">Location</h3>
-            <p class="location-area">Central Madrid</p>
-            <p class="location-desc">Located in the city centre, easy to reach by metro. After-work walk-ins are busiest between 17:00 and 19:00 — book ahead during those hours to guarantee your spot.</p>
+          <div class="visit-card">
+            <h3 class="visit-card-title" data-i18n="locationTitle">Ubicación</h3>
+            <p class="location-text" data-i18n="locationText">Centro de Madrid. Accesible en metro — a poca distancia de las principales líneas. Sin cita previa, o reserva si vienes entre 17:00 y 20:00 en días laborables.</p>
+            <div class="location-note">
+              <strong data-i18n="locationNoteTitle">Demo de portfolio</strong>
+              <span data-i18n="locationNoteText"> — En una web real, aquí iría la dirección exacta, mapa embebido e indicaciones de transporte público.</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== CTA ===== -->
-    <section id="booking" class="cta">
+    <section class="cta">
       <div class="container reveal">
-        <h2 class="section-heading">Book ahead, skip the wait</h2>
-        <p class="section-desc">Walk-ins are always welcome. Booking ahead guarantees your spot during peak hours.</p>
-        <div class="cta-actions">
-          <button class="btn btn-primary" data-action="open-booking">Book Ahead</button>
+        <h2 class="cta-heading" data-i18n="ctaHeading">¿Quieres probar el proceso de reserva?</h2>
+        <p class="cta-sub" data-i18n="ctaSub">Esta es una demo de portfolio. Haz clic abajo para explorar cómo funcionaría la experiencia de reserva.</p>
+        <div class="cta-btns">
+          <button class="btn btn-primary modal-trigger" data-i18n="ctaCta">Probar demo de reserva</button>
+          <a href="#servicios" class="btn btn-outline" data-i18n="ctaSecondary">Ver servicios</a>
         </div>
       </div>
     </section>
-
   </main>
-
-  <!-- ===== BOOKING MODAL ===== -->
-  <div id="booking-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Book ahead" hidden>
-    <div class="modal-panel">
-      <div class="modal-demo-bar">Portfolio demo — no real appointments are created</div>
-      <div class="modal-body">
-        <button class="modal-close" aria-label="Close booking">&times;</button>
-
-        <!-- Step 1: Service -->
-        <div class="modal-step" data-step="1">
-          <h2 class="modal-title" id="modal-title-1">Choose a service</h2>
-          <div role="radiogroup" aria-labelledby="modal-title-1" class="service-options" id="service-options">
-            <button type="button" role="radio" aria-checked="false" tabindex="0"
-                    class="service-option" data-service="Classic Cut" data-price="18" data-duration="30 min">
-              <span class="so-name">Classic Cut</span>
-              <span class="so-detail">30 min</span>
-              <span class="so-price">€18</span>
-            </button>
-            <button type="button" role="radio" aria-checked="false" tabindex="-1"
-                    class="service-option" data-service="Skin Fade" data-price="22" data-duration="30 min">
-              <span class="so-name">Skin Fade</span>
-              <span class="so-detail">30 min</span>
-              <span class="so-price">€22</span>
-            </button>
-            <button type="button" role="radio" aria-checked="false" tabindex="-1"
-                    class="service-option" data-service="Beard Trim" data-price="12" data-duration="20 min">
-              <span class="so-name">Beard Trim</span>
-              <span class="so-detail">20 min</span>
-              <span class="so-price">€12</span>
-            </button>
-            <button type="button" role="radio" aria-checked="false" tabindex="-1"
-                    class="service-option" data-service="Cut + Beard" data-price="28" data-duration="45 min">
-              <span class="so-name">Cut + Beard</span>
-              <span class="so-detail">45 min</span>
-              <span class="so-price">€28</span>
-            </button>
-          </div>
-          <div class="modal-actions">
-            <button class="btn btn-primary" id="step1-next" disabled>Next</button>
-          </div>
-        </div>
-
-        <!-- Step 2: Date & Time -->
-        <div class="modal-step" data-step="2" hidden>
-          <h2 class="modal-title" id="modal-title-2">Choose date &amp; time</h2>
-          <label for="booking-date" class="modal-label">Date</label>
-          <input type="date" id="booking-date" class="modal-date-input" required>
-          <div id="date-error" class="modal-error" role="alert" hidden></div>
-          <div id="time-slots-wrap" class="time-slots-wrap" hidden>
-            <span class="modal-label" id="time-slots-label">Available times</span>
-            <div role="radiogroup" aria-labelledby="time-slots-label" class="time-grid" id="time-grid"></div>
-          </div>
-          <div id="no-slots-msg" class="modal-error" role="alert" hidden></div>
-          <div class="modal-actions">
-            <button class="btn btn-outline" id="step2-back">Back</button>
-            <button class="btn btn-primary" id="step2-next" disabled>Next</button>
-          </div>
-        </div>
-
-        <!-- Step 3: Summary -->
-        <div class="modal-step" data-step="3" hidden>
-          <h2 class="modal-title" id="modal-title-3">Booking summary</h2>
-          <div class="summary-card">
-            <div class="summary-row">
-              <span class="summary-label">Service</span>
-              <span class="summary-value" id="sum-service"></span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Date</span>
-              <span class="summary-value" id="sum-date"></span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Time</span>
-              <span class="summary-value" id="sum-time"></span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Duration</span>
-              <span class="summary-value" id="sum-duration"></span>
-            </div>
-            <div class="summary-row summary-total">
-              <span class="summary-label">Price</span>
-              <span class="summary-value" id="sum-price"></span>
-            </div>
-          </div>
-          <p class="summary-demo-note">This is a portfolio demonstration. On a production site, confirming here would create a real appointment with email or SMS confirmation, calendar sync, and reminders.</p>
-          <div class="modal-actions">
-            <button class="btn btn-outline" id="step3-back">Back</button>
-            <button class="btn btn-primary" id="step3-done">Done</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container footer-inner">
       <span class="footer-logo">Corte Madrid</span>
-      <p class="footer-copy">&copy; 2026 Corte Madrid</p>
-      <p class="footer-demo">This is a fictional portfolio demo. No real business, appointments, or services are represented.</p>
+      <p class="footer-copy" data-i18n="footerCopy">© 2026 Corte Madrid</p>
+      <p class="footer-demo" data-i18n="footerDemo">Este es un sitio ficticio de portfolio creado como demostración de diseño web. No representa un negocio real.</p>
     </div>
   </footer>
+
+  <!-- ===== BOOKING MODAL ===== -->
+  <div class="modal-overlay" id="booking-modal" role="dialog" aria-modal="true" aria-label="Demo de reserva">
+    <div class="modal-panel">
+      <div class="modal-demo-bar" data-i18n="modalBar">Demo de portfolio — no se crean reservas reales</div>
+      <button class="modal-close" aria-label="Cerrar" data-i18n-label="modalCloseLabel">×</button>
+      <div class="modal-body">
+
+        <!-- Step 1: Choose service -->
+        <div class="modal-step active" id="step-1" data-step="1">
+          <h3 class="modal-step-title" tabindex="-1" data-i18n="step1Title">1. Elige servicio</h3>
+          <div class="service-options" role="radiogroup" aria-label="Opciones de servicio" id="service-radiogroup">
+            <button class="service-opt" role="radio" aria-checked="false" tabindex="0" data-service="classic" data-price="18" data-duration="30">
+              <span><span class="service-opt-name" data-i18n="optClassicName">Corte Clásico</span><br><span class="service-opt-duration" data-i18n="optClassicDur">30 min</span></span>
+              <span class="service-opt-price">€18</span>
+            </button>
+            <button class="service-opt" role="radio" aria-checked="false" tabindex="-1" data-service="fade" data-price="22" data-duration="30">
+              <span><span class="service-opt-name" data-i18n="optFadeName">Degradado Skin Fade</span><br><span class="service-opt-duration" data-i18n="optFadeDur">30 min</span></span>
+              <span class="service-opt-price">€22</span>
+            </button>
+            <button class="service-opt" role="radio" aria-checked="false" tabindex="-1" data-service="beard" data-price="12" data-duration="20">
+              <span><span class="service-opt-name" data-i18n="optBeardName">Arreglo de Barba</span><br><span class="service-opt-duration" data-i18n="optBeardDur">20 min</span></span>
+              <span class="service-opt-price">€12</span>
+            </button>
+            <button class="service-opt" role="radio" aria-checked="false" tabindex="-1" data-service="combo" data-price="28" data-duration="45">
+              <span><span class="service-opt-name" data-i18n="optComboName">Corte + Barba</span><br><span class="service-opt-duration" data-i18n="optComboDur">45 min</span></span>
+              <span class="service-opt-price">€28</span>
+            </button>
+          </div>
+          <div class="modal-nav">
+            <button class="btn btn-primary" id="step1-next" disabled data-i18n="btnNext">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Date & time -->
+        <div class="modal-step" id="step-2" data-step="2">
+          <h3 class="modal-step-title" tabindex="-1" data-i18n="step2Title">2. Fecha y hora</h3>
+          <label for="booking-date" style="font-size:0.9rem;display:block;margin-bottom:0.4rem;" data-i18n="dateLabel">Elige una fecha</label>
+          <input type="date" id="booking-date" class="date-input">
+          <div class="time-grid" id="time-grid" role="radiogroup" aria-label="Horas disponibles"></div>
+          <div class="modal-nav">
+            <button class="btn btn-outline" id="step2-back" data-i18n="btnBack">Atrás</button>
+            <button class="btn btn-primary" id="step2-next" disabled data-i18n="btnNext">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div class="modal-step" id="step-3" data-step="3">
+          <h3 class="modal-step-title" tabindex="-1" data-i18n="step3Title">3. Resumen</h3>
+          <div class="confirm-block">
+            <p class="confirm-label" data-i18n="confirmService">Servicio</p>
+            <p class="confirm-value" id="confirm-service"></p>
+          </div>
+          <div class="confirm-block">
+            <p class="confirm-label" data-i18n="confirmDate">Fecha</p>
+            <p class="confirm-value" id="confirm-date"></p>
+          </div>
+          <div class="confirm-block">
+            <p class="confirm-label" data-i18n="confirmTime">Hora</p>
+            <p class="confirm-value" id="confirm-time"></p>
+          </div>
+          <div class="confirm-block">
+            <p class="confirm-label" data-i18n="confirmPrice">Precio</p>
+            <p class="confirm-value" id="confirm-price"></p>
+          </div>
+          <div class="confirm-notice" data-i18n-html="confirmNotice">
+            <strong>Esto es una demo.</strong> En una web real, aquí se confirmaría la cita y se enviaría un email/SMS de confirmación con opción de cancelar o modificar.
+          </div>
+          <div class="modal-nav">
+            <button class="btn btn-outline" id="step3-back" data-i18n="btnBack">Atrás</button>
+            <button class="btn btn-secondary" id="step3-close" data-i18n="btnDone">Cerrar demo</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <script>
   (function() {
     'use strict';
 
     /* ========================================
-       UTILITIES
-       ======================================== */
+       TRANSLATIONS
+    ======================================== */
+    var T = {
+      es: {
+        skipLink: 'Saltar al contenido',
+        navServices: 'Servicios', navGallery: 'Galería', navAbout: 'Nosotros', navVisit: 'Visita',
+        navCta: 'Probar demo de reserva',
+        heroHeading: 'Cortes precisos.<br>Sin esperas. Sin complicaciones.',
+        heroSub: 'Barbería moderna en Madrid. Atendemos sin cita previa — también puedes reservar para horas de mayor afluencia.',
+        heroCta: 'Probar demo de reserva', heroSecondary: 'Ver servicios y precios',
+        servicesTag: 'Servicios', servicesHeading: 'Qué hacemos y cuánto cuesta',
+        servicesDesc: 'Cuatro servicios, precios claros. Sin cita previa o con reserva — tú decides.',
+        s1Name: 'Corte Clásico', s1Detail: 'Corte completo con tijera o máquina, consulta de estilo incluida. 30 min.', s1PriceLabel: '18 euros',
+        s2Name: 'Degradado Skin Fade', s2Detail: 'Degradado completo con detalle en contornos y líneas. 30 min.', s2PriceLabel: '22 euros',
+        s3Name: 'Arreglo de Barba', s3Detail: 'Perfilado con navaja, recorte y forma. 20 min.', s3PriceLabel: '12 euros',
+        s4Name: 'Corte + Barba', s4Detail: 'Servicio completo: corte y arreglo de barba en una sesión. 45 min.', s4PriceLabel: '28 euros',
+        galleryTag: 'Galería', galleryHeading: 'Nuestro trabajo',
+        galCap1: 'Degradado limpio', galCap2: 'Corte con tijera', galCap3: 'Trabajo de precisión', galCap4: 'Crop texturizado', galCap5: 'La barbería',
+        altHero: 'Barbero realizando un corte degradado con precisión',
+        altGal1: 'Degradado limpio con línea definida', altGal2: 'Corte clásico con tijera y peine',
+        altGal3: 'Barbero trabajando en un corte preciso',
+        altGal4: 'Hombre con barba bien arreglada y corte moderno',
+        altGal5: 'Retrato de hombre joven con estilo cuidado',
+        altAbout: 'Barbero trabajando en un corte moderno',
+        aboutTag: 'Nosotros', aboutHeading: 'Una barbería, no una marca de estilo de vida',
+        aboutText: 'Corte Madrid nació de una idea sencilla: hacer bien cuatro cosas, cobrar un precio justo y no hacer perder el tiempo a nadie. Sin cita previa — si quieres asegurarte sitio en horas punta, puedes reservar.',
+        val1Label: '4 servicios', val1Desc: 'Enfocados, no infinitos',
+        val2Label: 'Precios claros', val2Desc: 'Lo que ves es lo que pagas',
+        val3Label: 'Sin cita', val3Desc: 'Ven cuando quieras',
+        val4Label: 'Reservas disponibles', val4Desc: 'Para horas de más afluencia',
+        visitSrTitle: 'Visítanos',
+        hoursTitle: 'Horario', hoursMF: 'Lunes — Viernes', hoursSat: 'Sábado', hoursSun: 'Domingo', hoursClosed: 'Cerrado',
+        locationTitle: 'Ubicación',
+        locationText: 'Centro de Madrid. Accesible en metro — a poca distancia de las principales líneas. Sin cita previa, o reserva si vienes entre 17:00 y 20:00 en días laborables.',
+        locationNoteTitle: 'Demo de portfolio',
+        locationNoteText: ' — En una web real, aquí iría la dirección exacta, mapa embebido e indicaciones de transporte público.',
+        ctaHeading: '¿Quieres probar el proceso de reserva?',
+        ctaSub: 'Esta es una demo de portfolio. Haz clic abajo para explorar cómo funcionaría la experiencia de reserva.',
+        ctaCta: 'Probar demo de reserva', ctaSecondary: 'Ver servicios',
+        footerCopy: '© 2026 Corte Madrid',
+        footerDemo: 'Este es un sitio ficticio de portfolio creado como demostración de diseño web. No representa un negocio real.',
+        modalBar: 'Demo de portfolio — no se crean reservas reales', modalCloseLabel: 'Cerrar',
+        step1Title: '1. Elige servicio', step2Title: '2. Fecha y hora', step3Title: '3. Resumen',
+        optClassicName: 'Corte Clásico', optClassicDur: '30 min',
+        optFadeName: 'Degradado Skin Fade', optFadeDur: '30 min',
+        optBeardName: 'Arreglo de Barba', optBeardDur: '20 min',
+        optComboName: 'Corte + Barba', optComboDur: '45 min',
+        dateLabel: 'Elige una fecha',
+        btnNext: 'Siguiente', btnBack: 'Atrás', btnDone: 'Cerrar demo',
+        confirmService: 'Servicio', confirmDate: 'Fecha', confirmTime: 'Hora', confirmPrice: 'Precio',
+        confirmNotice: '<strong>Esto es una demo.</strong> En una web real, aquí se confirmaría la cita y se enviaría un email/SMS de confirmación con opción de cancelar o modificar.',
+        noSlots: 'No quedan horas disponibles hoy. Elige otra fecha.',
+        sundayMsg: 'Cerramos los domingos. Elige otro día.',
+        docTitle: 'Corte Madrid — Barbería moderna en Madrid',
+        metaDesc: 'Barbería moderna en el centro de Madrid. Atendemos sin cita, reservas disponibles. Cortes, degradados y barba.',
+        menuOpen: 'Abrir menú', menuClose: 'Cerrar menú', langLabel: 'Idioma',
+        serviceNames: { classic: 'Corte Clásico', fade: 'Degradado Skin Fade', beard: 'Arreglo de Barba', combo: 'Corte + Barba' }
+      },
+      en: {
+        skipLink: 'Skip to content',
+        navServices: 'Services', navGallery: 'Gallery', navAbout: 'About', navVisit: 'Visit',
+        navCta: 'Try booking demo',
+        heroHeading: 'Sharp cuts.<br>No queue. No fuss.',
+        heroSub: 'Modern barber shop in Madrid. Walk-ins welcome — you can also book ahead for peak hours.',
+        heroCta: 'Try booking demo', heroSecondary: 'View services & prices',
+        servicesTag: 'Services', servicesHeading: 'What we do, what it costs',
+        servicesDesc: 'Four services, clear prices. Walk in or book ahead — your call.',
+        s1Name: 'Classic Cut', s1Detail: 'Full cut with scissors or clippers, style consultation included. 30 min.', s1PriceLabel: '18 euros',
+        s2Name: 'Skin Fade', s2Detail: 'Full fade with detailed edges and line work. 30 min.', s2PriceLabel: '22 euros',
+        s3Name: 'Beard Trim', s3Detail: 'Razor-lined shaping and trim. 20 min.', s3PriceLabel: '12 euros',
+        s4Name: 'Cut + Beard', s4Detail: 'Full service: cut and beard grooming in one session. 45 min.', s4PriceLabel: '28 euros',
+        galleryTag: 'Gallery', galleryHeading: 'Our work',
+        galCap1: 'Clean fade', galCap2: 'Scissor cut', galCap3: 'Precision work', galCap4: 'Textured crop', galCap5: 'The shop',
+        altHero: 'Barber performing a precise fade cut',
+        altGal1: 'Clean fade with a sharp line', altGal2: 'Classic scissor-and-comb cut',
+        altGal3: 'Barber working on a precise cut',
+        altGal4: 'Man with a well-groomed beard and modern cut',
+        altGal5: 'Portrait of a young man with a sharp style',
+        altAbout: 'Barber working on a modern cut',
+        aboutTag: 'About', aboutHeading: 'A barber shop, not a lifestyle brand',
+        aboutText: 'Corte Madrid was born from a simple idea: do four things well, charge a fair price, and don\u2019t waste anyone\u2019s time. Walk-ins welcome \u2014 if you want a guaranteed slot during rush hours, book ahead.',
+        val1Label: '4 services', val1Desc: 'Focused, not endless',
+        val2Label: 'Clear pricing', val2Desc: 'What you see is what you pay',
+        val3Label: 'No appointment needed', val3Desc: 'Just walk in',
+        val4Label: 'Bookings available', val4Desc: 'For peak hours',
+        visitSrTitle: 'Visit us',
+        hoursTitle: 'Hours', hoursMF: 'Monday \u2014 Friday', hoursSat: 'Saturday', hoursSun: 'Sunday', hoursClosed: 'Closed',
+        locationTitle: 'Location',
+        locationText: 'Central Madrid. Metro accessible \u2014 close to major lines. Walk in anytime, or book if you\u2019re coming between 17:00\u201320:00 on weekdays.',
+        locationNoteTitle: 'Portfolio demo',
+        locationNoteText: ' \u2014 On a production site, this would include the exact address, an embedded map, and public transport directions.',
+        ctaHeading: 'Want to try the booking flow?',
+        ctaSub: 'This is a portfolio demo. Click below to explore how the booking experience would work.',
+        ctaCta: 'Try booking demo', ctaSecondary: 'View services',
+        footerCopy: '\u00a9 2026 Corte Madrid',
+        footerDemo: 'This is a fictional portfolio site created as a web design demonstration. It does not represent a real business.',
+        modalBar: 'Portfolio demo \u2014 no real appointments are created', modalCloseLabel: 'Close',
+        step1Title: '1. Choose a service', step2Title: '2. Date & time', step3Title: '3. Summary',
+        optClassicName: 'Classic Cut', optClassicDur: '30 min',
+        optFadeName: 'Skin Fade', optFadeDur: '30 min',
+        optBeardName: 'Beard Trim', optBeardDur: '20 min',
+        optComboName: 'Cut + Beard', optComboDur: '45 min',
+        dateLabel: 'Choose a date',
+        btnNext: 'Next', btnBack: 'Back', btnDone: 'Close demo',
+        confirmService: 'Service', confirmDate: 'Date', confirmTime: 'Time', confirmPrice: 'Price',
+        confirmNotice: '<strong>This is a demo.</strong> On a real site, this would confirm the appointment and send an email/SMS confirmation with options to cancel or reschedule.',
+        noSlots: 'No time slots left for today. Please pick another date.',
+        sundayMsg: 'We\u2019re closed on Sundays. Please pick another day.',
+        docTitle: 'Corte Madrid \u2014 Modern barber shop in Madrid',
+        metaDesc: 'Modern barber shop in central Madrid. Walk-ins welcome, bookings available. Cuts, fades, and beard grooming.',
+        menuOpen: 'Open menu', menuClose: 'Close menu', langLabel: 'Language',
+        serviceNames: { classic: 'Classic Cut', fade: 'Skin Fade', beard: 'Beard Trim', combo: 'Cut + Beard' }
+      },
+      zh: {
+        skipLink: '\u8df3\u8f6c\u5230\u5185\u5bb9',
+        navServices: '\u670d\u52a1', navGallery: '\u4f5c\u54c1', navAbout: '\u5173\u4e8e', navVisit: '\u5230\u5e97',
+        navCta: '\u4f53\u9a8c\u9884\u7ea6\u6f14\u793a',
+        heroHeading: '\u5229\u843d\u7684\u526a\u88c1\u3002<br>\u4e0d\u7528\u6392\u961f\u3002\u4e0d\u7e41\u7410\u3002',
+        heroSub: '\u9a6c\u5fb7\u91cc\u7684\u73b0\u4ee3\u7406\u53d1\u5e97\u3002\u65e0\u9700\u9884\u7ea6\u76f4\u63a5\u5230\u5e97\u2014\u2014\u4e5f\u53ef\u4ee5\u63d0\u524d\u9884\u7ea6\u9ad8\u5cf0\u65f6\u6bb5\u3002',
+        heroCta: '\u4f53\u9a8c\u9884\u7ea6\u6f14\u793a', heroSecondary: '\u67e5\u770b\u670d\u52a1\u548c\u4ef7\u683c',
+        servicesTag: '\u670d\u52a1', servicesHeading: '\u670d\u52a1\u9879\u76ee\u548c\u4ef7\u683c',
+        servicesDesc: '\u56db\u9879\u670d\u52a1\uff0c\u4ef7\u683c\u900f\u660e\u3002\u76f4\u63a5\u5230\u5e97\u6216\u63d0\u524d\u9884\u7ea6\u2014\u2014\u7531\u4f60\u51b3\u5b9a\u3002',
+        s1Name: '\u7ecf\u5178\u526a\u53d1', s1Detail: '\u526a\u5200\u6216\u7535\u63a8\u526a\u5b8c\u6574\u9020\u578b\uff0c\u542b\u53d1\u578b\u54a8\u8be2\u3002 30 \u5206\u949f\u3002', s1PriceLabel: '18 \u6b27\u5143',
+        s2Name: 'Skin Fade \u6e10\u53d8', s2Detail: '\u5b8c\u6574\u6e10\u53d8\uff0c\u7cbe\u7ec6\u8f6e\u5ed3\u548c\u7ebf\u6761\u5904\u7406\u300230 \u5206\u949f\u3002', s2PriceLabel: '22 \u6b27\u5143',
+        s3Name: '\u80e1\u987b\u4fee\u5251', s3Detail: '\u5251\u5200\u4fee\u8fb9\u5851\u5f62\u300220 \u5206\u949f\u3002', s3PriceLabel: '12 \u6b27\u5143',
+        s4Name: '\u526a\u53d1 + \u80e1\u987b', s4Detail: '\u5168\u5957\u670d\u52a1\uff1a\u526a\u53d1\u52a0\u80e1\u987b\u4fee\u5251\u4e00\u6b21\u5b8c\u6210\u300245 \u5206\u949f\u3002', s4PriceLabel: '28 \u6b27\u5143',
+        galleryTag: '\u4f5c\u54c1', galleryHeading: '\u6211\u4eec\u7684\u4f5c\u54c1',
+        galCap1: '\u5e72\u51c0\u6e10\u53d8', galCap2: '\u526a\u5200\u9020\u578b', galCap3: '\u7cbe\u7ec6\u5de5\u4f5c', galCap4: '\u7eb9\u7406\u88c1\u526a', galCap5: '\u7406\u53d1\u5e97',
+        altHero: '\u7406\u53d1\u5e08\u6b63\u5728\u7cbe\u786e\u5730\u505a\u6e10\u53d8\u53d1\u578b',
+        altGal1: '\u7ebf\u6761\u5206\u660e\u7684\u5e72\u51c0\u6e10\u53d8', altGal2: '\u7ecf\u5178\u526a\u5200\u68b3\u5b50\u9020\u578b',
+        altGal3: '\u7406\u53d1\u5e08\u6b63\u5728\u7cbe\u786e\u526a\u53d1',
+        altGal4: '\u80e1\u987b\u6574\u9f50\u3001\u53d1\u578b\u73b0\u4ee3\u7684\u7537\u58eb',
+        altGal5: '\u5e74\u8f7b\u7537\u58eb\u7cbe\u81f4\u9020\u578b\u7684\u8096\u50cf',
+        altAbout: '\u7406\u53d1\u5e08\u6b63\u5728\u505a\u73b0\u4ee3\u53d1\u578b',
+        aboutTag: '\u5173\u4e8e', aboutHeading: '\u4e00\u5bb6\u7406\u53d1\u5e97\uff0c\u4e0d\u662f\u751f\u6d3b\u65b9\u5f0f\u54c1\u724c',
+        aboutText: 'Corte Madrid \u8bde\u751f\u4e8e\u4e00\u4e2a\u7b80\u5355\u7684\u7406\u5ff5\uff1a\u628a\u56db\u4ef6\u4e8b\u505a\u597d\uff0c\u6536\u516c\u9053\u7684\u4ef7\u683c\uff0c\u4e0d\u6d6a\u8d39\u4efb\u4f55\u4eba\u7684\u65f6\u95f4\u3002\u65e0\u9700\u9884\u7ea6\u76f4\u63a5\u5230\u5e97\u2014\u2014\u5982\u679c\u60f3\u5728\u9ad8\u5cf0\u65f6\u6bb5\u786e\u4fdd\u6709\u4f4d\uff0c\u53ef\u4ee5\u63d0\u524d\u9884\u7ea6\u3002',
+        val1Label: '4 \u9879\u670d\u52a1', val1Desc: '\u4e13\u6ce8\u800c\u975e\u65e0\u9650',
+        val2Label: '\u4ef7\u683c\u900f\u660e', val2Desc: '\u6240\u89c1\u5373\u6240\u4ed8',
+        val3Label: '\u65e0\u9700\u9884\u7ea6', val3Desc: '\u968f\u65f6\u5230\u5e97',
+        val4Label: '\u53ef\u63d0\u524d\u9884\u7ea6', val4Desc: '\u9002\u7528\u4e8e\u9ad8\u5cf0\u65f6\u6bb5',
+        visitSrTitle: '\u5230\u5e97\u4fe1\u606f',
+        hoursTitle: '\u8425\u4e1a\u65f6\u95f4', hoursMF: '\u5468\u4e00 \u2014 \u5468\u4e94', hoursSat: '\u5468\u516d', hoursSun: '\u5468\u65e5', hoursClosed: '\u4f11\u606f',
+        locationTitle: '\u5730\u5740',
+        locationText: '\u9a6c\u5fb7\u91cc\u5e02\u4e2d\u5fc3\u3002\u5730\u94c1\u53ef\u8fbe\u2014\u2014\u9760\u8fd1\u4e3b\u8981\u7ebf\u8def\u3002\u968f\u65f6\u5230\u5e97\uff0c\u6216\u5728\u5de5\u4f5c\u65e5 17:00\u201320:00 \u63d0\u524d\u9884\u7ea6\u3002',
+        locationNoteTitle: '\u4f5c\u54c1\u96c6\u6f14\u793a',
+        locationNoteText: ' \u2014 \u5728\u6b63\u5f0f\u7f51\u7ad9\u4e2d\uff0c\u8fd9\u91cc\u4f1a\u663e\u793a\u786e\u5207\u5730\u5740\u3001\u5d4c\u5165\u5f0f\u5730\u56fe\u548c\u516c\u5171\u4ea4\u901a\u6307\u5f15\u3002',
+        ctaHeading: '\u60f3\u8bd5\u8bd5\u9884\u7ea6\u6d41\u7a0b\u5417\uff1f',
+        ctaSub: '\u8fd9\u662f\u4e00\u4e2a\u4f5c\u54c1\u96c6\u6f14\u793a\u3002\u70b9\u51fb\u4e0b\u65b9\u4f53\u9a8c\u9884\u7ea6\u6d41\u7a0b\u3002',
+        ctaCta: '\u4f53\u9a8c\u9884\u7ea6\u6f14\u793a', ctaSecondary: '\u67e5\u770b\u670d\u52a1',
+        footerCopy: '\u00a9 2026 Corte Madrid',
+        footerDemo: '\u8fd9\u662f\u4e00\u4e2a\u865a\u6784\u7684\u4f5c\u54c1\u96c6\u7f51\u7ad9\uff0c\u4f5c\u4e3a\u7f51\u9875\u8bbe\u8ba1\u6f14\u793a\u3002\u4e0d\u4ee3\u8868\u771f\u5b9e\u5546\u5bb6\u3002',
+        modalBar: '\u4f5c\u54c1\u96c6\u6f14\u793a \u2014 \u4e0d\u4f1a\u521b\u5efa\u771f\u5b9e\u9884\u7ea6', modalCloseLabel: '\u5173\u95ed',
+        step1Title: '1. \u9009\u62e9\u670d\u52a1', step2Title: '2. \u65e5\u671f\u548c\u65f6\u95f4', step3Title: '3. \u786e\u8ba4\u4fe1\u606f',
+        optClassicName: '\u7ecf\u5178\u526a\u53d1', optClassicDur: '30 \u5206\u949f',
+        optFadeName: 'Skin Fade \u6e10\u53d8', optFadeDur: '30 \u5206\u949f',
+        optBeardName: '\u80e1\u987b\u4fee\u5251', optBeardDur: '20 \u5206\u949f',
+        optComboName: '\u526a\u53d1 + \u80e1\u987b', optComboDur: '45 \u5206\u949f',
+        dateLabel: '\u9009\u62e9\u65e5\u671f',
+        btnNext: '\u4e0b\u4e00\u6b65', btnBack: '\u8fd4\u56de', btnDone: '\u5173\u95ed\u6f14\u793a',
+        confirmService: '\u670d\u52a1', confirmDate: '\u65e5\u671f', confirmTime: '\u65f6\u95f4', confirmPrice: '\u4ef7\u683c',
+        confirmNotice: '<strong>\u8fd9\u662f\u6f14\u793a\u3002</strong> \u5728\u6b63\u5f0f\u7f51\u7ad9\u4e2d\uff0c\u8fd9\u91cc\u4f1a\u786e\u8ba4\u9884\u7ea6\u5e76\u53d1\u9001\u90ae\u4ef6/\u77ed\u4fe1\u786e\u8ba4\uff0c\u5e76\u63d0\u4f9b\u53d6\u6d88\u6216\u4fee\u6539\u9009\u9879\u3002',
+        noSlots: '\u4eca\u5929\u6ca1\u6709\u53ef\u7528\u65f6\u6bb5\u4e86\u3002\u8bf7\u9009\u62e9\u5176\u4ed6\u65e5\u671f\u3002',
+        sundayMsg: '\u5468\u65e5\u4f11\u606f\u3002\u8bf7\u9009\u62e9\u5176\u4ed6\u65e5\u671f\u3002',
+        docTitle: 'Corte Madrid \u2014 \u9a6c\u5fb7\u91cc\u73b0\u4ee3\u7406\u53d1\u5e97',
+        metaDesc: '\u9a6c\u5fb7\u91cc\u5e02\u4e2d\u5fc3\u7684\u73b0\u4ee3\u7406\u53d1\u5e97\u3002\u65e0\u9700\u9884\u7ea6\uff0c\u53ef\u63d0\u524d\u9884\u7ea6\u3002\u526a\u53d1\u3001\u6e10\u53d8\u3001\u80e1\u987b\u4fee\u5251\u3002',
+        menuOpen: '\u6253\u5f00\u83dc\u5355', menuClose: '\u5173\u95ed\u83dc\u5355', langLabel: '\u8bed\u8a00',
+        serviceNames: { classic: '\u7ecf\u5178\u526a\u53d1', fade: 'Skin Fade \u6e10\u53d8', beard: '\u80e1\u987b\u4fee\u5251', combo: '\u526a\u53d1 + \u80e1\u987b' }
+      }
+    };
 
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var currentLang = 'es';
+    var langCodes = { es: 'es', en: 'en', zh: 'zh-Hans' };
 
-    function getLocalDateStr(d) {
-      var y = d.getFullYear();
-      var m = String(d.getMonth() + 1).padStart(2, '0');
-      var day = String(d.getDate()).padStart(2, '0');
-      return y + '-' + m + '-' + day;
-    }
+    /* ===== Language application ===== */
+    function applyLanguage(lang) {
+      currentLang = lang;
+      var t = T[lang];
+      document.documentElement.lang = langCodes[lang];
+      document.title = t.docTitle;
+      var meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', t.metaDesc);
 
-    function parseDateParts(str) {
-      var parts = str.split('-').map(Number);
-      return { y: parts[0], m: parts[1], d: parts[2] };
-    }
-
-    function isSunday(dateStr) {
-      var p = parseDateParts(dateStr);
-      return new Date(p.y, p.m - 1, p.d).getDay() === 0;
-    }
-
-    function setInert(flag) {
-      var targets = document.querySelectorAll('main, .nav, .footer');
-      targets.forEach(function(el) {
-        if (flag) el.setAttribute('inert', '');
-        else el.removeAttribute('inert');
+      // Text content
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
       });
-    }
-
-    function getFocusable(container) {
-      var sel = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-      return Array.from(container.querySelectorAll(sel)).filter(function(el) {
-        return el.offsetParent !== null && !el.closest('[hidden]');
+      // HTML content
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) el.innerHTML = t[key];
       });
+      // aria-label
+      document.querySelectorAll('[data-i18n-label]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-label');
+        if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+      });
+      // alt text
+      document.querySelectorAll('[data-i18n-alt]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-alt');
+        if (t[key] !== undefined) el.setAttribute('alt', t[key]);
+      });
+
+      // Update desktop lang selector
+      document.getElementById('lang-current').textContent = lang.toUpperCase();
+      document.querySelectorAll('.lang-option').forEach(function(btn) {
+        btn.setAttribute('aria-current', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+      });
+      document.querySelectorAll('.mobile-lang-btn').forEach(function(btn) {
+        btn.setAttribute('aria-current', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+      });
+
+      // Update menu button label
+      var toggle = document.getElementById('nav-toggle');
+      if (toggle) {
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-label', expanded ? t.menuClose : t.menuOpen);
+      }
+
+      // If modal is open, update confirmation if on step 3
+      if (selectedService && document.getElementById('step-3').classList.contains('active')) {
+        updateConfirmation();
+      }
+
+      localStorage.setItem('corte-madrid-lang', lang);
     }
 
-    /* ========================================
-       MOBILE MENU
-       ======================================== */
+    /* ===== Language selector logic ===== */
+    var langToggle = document.getElementById('lang-toggle');
+    var langDropdown = document.getElementById('lang-dropdown');
 
-    var navToggle = document.getElementById('nav-toggle');
-    var mobileMenu = document.getElementById('mobile-menu');
-    var menuOpen = false;
-    var menuFocusTrap = null;
+    langToggle.addEventListener('click', function() {
+      var open = langDropdown.hidden;
+      langDropdown.hidden = !open;
+      langToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
 
-    function openMenu() {
-      menuOpen = true;
-      mobileMenu.classList.add('open');
-      navToggle.setAttribute('aria-expanded', 'true');
-      navToggle.setAttribute('aria-label', 'Close menu');
-      document.body.style.overflow = 'hidden';
-      setInert(true);
-      // Keep nav interactive
-      document.querySelector('.nav').removeAttribute('inert');
-      // Focus first menu link
-      var firstLink = mobileMenu.querySelector('a, button');
-      if (firstLink) firstLink.focus();
-      // Set up focus trap
-      document.addEventListener('keydown', menuKeyHandler);
-    }
+    document.addEventListener('click', function(e) {
+      if (!langToggle.contains(e.target) && !langDropdown.contains(e.target)) {
+        langDropdown.hidden = true;
+        langToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-    function closeMenu(restoreFocus) {
-      if (!menuOpen) return;
-      menuOpen = false;
-      mobileMenu.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navToggle.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-      setInert(false);
-      document.removeEventListener('keydown', menuKeyHandler);
-      if (restoreFocus !== false) navToggle.focus();
-    }
-
-    function menuKeyHandler(e) {
+    langDropdown.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        closeMenu(true);
-        return;
+        langDropdown.hidden = true;
+        langToggle.setAttribute('aria-expanded', 'false');
+        langToggle.focus();
       }
-      if (e.key === 'Tab') {
-        var focusable = [navToggle].concat(getFocusable(mobileMenu));
-        if (focusable.length === 0) return;
-        var first = focusable[0];
-        var last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault(); last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault(); first.focus();
-        }
-      }
-    }
-
-    navToggle.addEventListener('click', function() {
-      if (menuOpen) closeMenu(true);
-      else openMenu();
     });
 
-    // Close menu on nav link click
-    mobileMenu.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', function() { closeMenu(false); });
+    document.querySelectorAll('.lang-option').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        applyLanguage(btn.getAttribute('data-lang'));
+        langDropdown.hidden = true;
+        langToggle.setAttribute('aria-expanded', 'false');
+        langToggle.focus();
+      });
     });
 
-    // Close on resize past breakpoint
-    var mql = window.matchMedia('(min-width: 768px)');
-    function handleBreakpoint(e) {
-      if (e.matches && menuOpen) closeMenu(false);
-    }
-    if (mql.addEventListener) mql.addEventListener('change', handleBreakpoint);
-    else if (mql.addListener) mql.addListener(handleBreakpoint);
+    document.querySelectorAll('.mobile-lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        applyLanguage(btn.getAttribute('data-lang'));
+      });
+    });
 
-    /* ========================================
-       NAV SCROLL EFFECT
-       ======================================== */
-
+    /* ===== NAV SCROLL ===== */
     var nav = document.querySelector('.nav');
-    var ticking = false;
-
+    var scrollTick = false;
     window.addEventListener('scroll', function() {
-      if (!ticking) {
+      if (!scrollTick) {
         requestAnimationFrame(function() {
           nav.classList.toggle('scrolled', window.scrollY > 10);
-          ticking = false;
+          scrollTick = false;
         });
-        ticking = true;
+        scrollTick = true;
       }
     }, { passive: true });
 
-    /* ========================================
-       BOOKING MODAL
-       ======================================== */
+    /* ===== MOBILE MENU ===== */
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var mainContent = document.getElementById('main-content');
+    var footer = document.querySelector('.footer');
 
-    var modal = document.getElementById('booking-modal');
-    var modalPanel = modal.querySelector('.modal-panel');
-    var modalClose = modal.querySelector('.modal-close');
-    var triggerEl = null;
-    var currentStep = 1;
+    function setInert(state) {
+      if (state) {
+        mainContent.setAttribute('inert', '');
+        footer.setAttribute('inert', '');
+        nav.querySelector('.nav-links').setAttribute('inert', '');
+      } else {
+        mainContent.removeAttribute('inert');
+        footer.removeAttribute('inert');
+        nav.querySelector('.nav-links').removeAttribute('inert');
+      }
+    }
 
-    var state = {
-      service: null,
-      price: null,
-      duration: null,
-      date: null,
-      time: null
-    };
-
-    // Step elements
-    var steps = modal.querySelectorAll('.modal-step');
-    var serviceOptions = document.getElementById('service-options');
-    var step1Next = document.getElementById('step1-next');
-
-    var dateInput = document.getElementById('booking-date');
-    var dateError = document.getElementById('date-error');
-    var timeSlotsWrap = document.getElementById('time-slots-wrap');
-    var timeGrid = document.getElementById('time-grid');
-    var noSlotsMsg = document.getElementById('no-slots-msg');
-    var step2Back = document.getElementById('step2-back');
-    var step2Next = document.getElementById('step2-next');
-
-    var step3Back = document.getElementById('step3-back');
-    var step3Done = document.getElementById('step3-done');
-
-    // Open modal
-    function openModal(trigger) {
-      if (menuOpen) closeMenu(false);
-      triggerEl = trigger;
-      modal.hidden = false;
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', T[currentLang].menuClose);
       document.body.style.overflow = 'hidden';
       setInert(true);
-      showStep(1);
-      modal.addEventListener('keydown', modalKeyHandler);
+      var firstLink = mobileMenu.querySelector('a, button');
+      if (firstLink) firstLink.focus();
     }
 
-    // Close modal
-    function closeModal() {
-      modal.hidden = true;
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', T[currentLang].menuOpen);
       document.body.style.overflow = '';
       setInert(false);
-      modal.removeEventListener('keydown', modalKeyHandler);
-      resetModal();
-      if (triggerEl) {
-        triggerEl.focus();
-        triggerEl = null;
+      navToggle.focus();
+    }
+
+    navToggle.addEventListener('click', function() {
+      if (mobileMenu.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+
+    // Close on link click
+    mobileMenu.querySelectorAll('.mobile-link').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        closeMenu();
       }
-    }
+    });
 
-    function resetModal() {
-      state.service = null;
-      state.price = null;
-      state.duration = null;
-      state.date = null;
-      state.time = null;
-      serviceOptions.querySelectorAll('[role="radio"]').forEach(function(r) {
-        r.setAttribute('aria-checked', 'false');
-        r.classList.remove('selected');
-      });
-      var radios = serviceOptions.querySelectorAll('[role="radio"]');
-      radios.forEach(function(r, i) { r.setAttribute('tabindex', i === 0 ? '0' : '-1'); });
-      dateInput.value = '';
-      dateError.hidden = true;
-      timeSlotsWrap.hidden = true;
-      noSlotsMsg.hidden = true;
-      timeGrid.innerHTML = '';
-      step1Next.disabled = true;
-      step2Next.disabled = true;
-      previousDuration = null;
-    }
-
-    function showStep(n) {
-      steps.forEach(function(s) { s.hidden = s.dataset.step !== String(n); });
-      currentStep = n;
-      // Set date constraints when entering step 2
-      if (n === 2) {
-        var now = new Date();
-        dateInput.min = getLocalDateStr(now);
-        var maxDate = new Date(now);
-        maxDate.setDate(maxDate.getDate() + 30);
-        dateInput.max = getLocalDateStr(maxDate);
-      }
-      // Fill summary on step 3
-      if (n === 3) fillSummary();
-      // Focus title
-      requestAnimationFrame(function() {
-        var title = document.getElementById('modal-title-' + n);
-        if (title) { title.setAttribute('tabindex', '-1'); title.focus(); }
-      });
-    }
-
-    // Modal key handler (escape + focus trap)
-    function modalKeyHandler(e) {
-      if (e.key === 'Escape') { closeModal(); return; }
+    // Focus trap in mobile menu
+    mobileMenu.addEventListener('keydown', function(e) {
       if (e.key !== 'Tab') return;
-      var focusable = getFocusable(modalPanel);
-      if (focusable.length === 0) return;
+      var focusable = [navToggle].concat(Array.from(mobileMenu.querySelectorAll('a, button')));
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
       if (e.shiftKey && document.activeElement === first) {
@@ -1071,220 +1264,19 @@
       } else if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault(); first.focus();
       }
+    });
+
+    // Breakpoint cleanup
+    var mql = window.matchMedia('(min-width: 768px)');
+    function handleBreakpoint(e) {
+      if (e.matches && mobileMenu.classList.contains('open')) closeMenu();
     }
+    if (mql.addEventListener) mql.addEventListener('change', handleBreakpoint);
+    else mql.addListener(handleBreakpoint);
 
-    // Close on backdrop click
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) closeModal();
-    });
-
-    modalClose.addEventListener('click', closeModal);
-
-    // --- Radiogroup helper ---
-    function initRadioGroup(container, onSelect) {
-      container.addEventListener('keydown', function(e) {
-        var items = Array.from(container.querySelectorAll('[role="radio"]'));
-        var idx = items.indexOf(document.activeElement);
-        if (idx === -1) return;
-        var next;
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-          e.preventDefault();
-          next = (idx + 1) % items.length;
-        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          next = (idx - 1 + items.length) % items.length;
-        } else if (e.key === ' ' || e.key === 'Enter') {
-          e.preventDefault();
-          selectRadio(items, items[idx], onSelect);
-          return;
-        } else return;
-        items.forEach(function(r) { r.setAttribute('tabindex', '-1'); });
-        items[next].setAttribute('tabindex', '0');
-        items[next].focus();
-        selectRadio(items, items[next], onSelect);
-      });
-
-      container.addEventListener('click', function(e) {
-        var radio = e.target.closest('[role="radio"]');
-        if (!radio) return;
-        var items = Array.from(container.querySelectorAll('[role="radio"]'));
-        items.forEach(function(r) { r.setAttribute('tabindex', '-1'); });
-        radio.setAttribute('tabindex', '0');
-        selectRadio(items, radio, onSelect);
-      });
-    }
-
-    function selectRadio(items, selected, onSelect) {
-      items.forEach(function(r) {
-        var isSel = r === selected;
-        r.setAttribute('aria-checked', isSel ? 'true' : 'false');
-        r.classList.toggle('selected', isSel);
-      });
-      if (onSelect) onSelect(selected);
-    }
-
-    // --- Step 1: Service selection ---
-    var previousDuration = null;
-
-    initRadioGroup(serviceOptions, function(el) {
-      state.service = el.dataset.service;
-      state.price = el.dataset.price;
-      state.duration = el.dataset.duration;
-      step1Next.disabled = false;
-
-      // If duration changed, clear time selection since available slots differ
-      if (previousDuration !== null && previousDuration !== state.duration) {
-        state.time = null;
-        step2Next.disabled = true;
-        timeGrid.innerHTML = '';
-        timeSlotsWrap.hidden = true;
-        noSlotsMsg.hidden = true;
-        // Re-generate slots if a date is already selected
-        if (state.date) {
-          generateTimeSlots(state.date);
-        }
-      }
-      previousDuration = state.duration;
-    });
-
-    step1Next.addEventListener('click', function() {
-      if (!state.service) return;
-      showStep(2);
-    });
-
-    // --- Step 2: Date & Time ---
-    dateInput.addEventListener('change', function() {
-      var val = dateInput.value;
-      state.time = null;
-      step2Next.disabled = true;
-      timeSlotsWrap.hidden = true;
-      noSlotsMsg.hidden = true;
-      dateError.hidden = true;
-      timeGrid.innerHTML = '';
-
-      if (!val) return;
-
-      // Validate not in the past
-      var p = parseDateParts(val);
-      var selected = new Date(p.y, p.m - 1, p.d);
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      if (selected < today) {
-        dateError.textContent = 'Please choose today or a future date.';
-        dateError.hidden = false;
-        dateInput.value = '';
-        return;
-      }
-
-      // Validate not Sunday
-      if (isSunday(val)) {
-        dateError.textContent = 'We\u2019re closed on Sundays. Please choose another day.';
-        dateError.hidden = false;
-        dateInput.value = '';
-        return;
-      }
-
-      state.date = val;
-      generateTimeSlots(val);
-    });
-
-    function parseDurationMinutes(durStr) {
-      var match = durStr && durStr.match(/(\d+)/);
-      return match ? parseInt(match[1], 10) : 30;
-    }
-
-    function generateTimeSlots(dateStr) {
-      var p = parseDateParts(dateStr);
-      var now = new Date();
-      var isToday = (p.y === now.getFullYear() && p.m === now.getMonth() + 1 && p.d === now.getDate());
-      var nowMinutes = now.getHours() * 60 + now.getMinutes();
-
-      // Compute latest valid start: service must finish by 20:00 (1200 min)
-      var closingMinutes = 20 * 60;
-      var serviceDuration = parseDurationMinutes(state.duration);
-      var latestStartMinutes = closingMinutes - serviceDuration;
-      // Round down to nearest 30-min slot boundary
-      latestStartMinutes = Math.floor(latestStartMinutes / 30) * 30;
-
-      timeGrid.innerHTML = '';
-      var slots = [];
-
-      for (var h = 10; h <= 19; h++) {
-        for (var m = 0; m < 60; m += 30) {
-          var slotMin = h * 60 + m;
-          // Don't offer slots that would finish after closing
-          if (slotMin > latestStartMinutes) continue;
-          // Skip past slots (with 30-min buffer) if today
-          if (isToday && slotMin < nowMinutes + 30) continue;
-          var timeStr = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
-          slots.push(timeStr);
-        }
-      }
-
-      if (slots.length === 0) {
-        noSlotsMsg.textContent = 'No available times remaining today. Please choose another day.';
-        noSlotsMsg.hidden = false;
-        timeSlotsWrap.hidden = true;
-        return;
-      }
-
-      slots.forEach(function(time, i) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.setAttribute('role', 'radio');
-        btn.setAttribute('aria-checked', 'false');
-        btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
-        btn.className = 'time-slot';
-        btn.dataset.time = time;
-        btn.textContent = time;
-        timeGrid.appendChild(btn);
-      });
-
-      timeSlotsWrap.hidden = false;
-    }
-
-    // Attach time-grid radiogroup handlers ONCE (event delegation handles dynamic slots)
-    initRadioGroup(timeGrid, function(el) {
-      state.time = el.dataset.time;
-      step2Next.disabled = false;
-    });
-
-    step2Back.addEventListener('click', function() { showStep(1); });
-    step2Next.addEventListener('click', function() {
-      if (!state.date || !state.time) return;
-      showStep(3);
-    });
-
-    // --- Step 3: Summary ---
-    function fillSummary() {
-      document.getElementById('sum-service').textContent = state.service;
-      document.getElementById('sum-duration').textContent = state.duration;
-      document.getElementById('sum-price').textContent = '\u20AC' + state.price;
-      document.getElementById('sum-time').textContent = state.time;
-
-      // Format date nicely
-      var p = parseDateParts(state.date);
-      var d = new Date(p.y, p.m - 1, p.d);
-      document.getElementById('sum-date').textContent =
-        d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    step3Back.addEventListener('click', function() { showStep(2); });
-    step3Done.addEventListener('click', closeModal);
-
-    // --- Open-booking triggers ---
-    document.querySelectorAll('[data-action="open-booking"]').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal(btn);
-      });
-    });
-
-    /* ========================================
-       SCROLL REVEAL (progressive enhancement)
-       ======================================== */
-
-    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    /* ===== REVEAL ANIMATIONS ===== */
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && 'IntersectionObserver' in window) {
       document.documentElement.classList.add('js-ready');
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -1293,17 +1285,278 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.15 });
-
-      document.querySelectorAll('.reveal').forEach(function(el) {
-        observer.observe(el);
-      });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
     } else {
-      // Ensure everything is visible without animation
-      document.querySelectorAll('.reveal').forEach(function(el) {
-        el.classList.add('visible');
+      document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+    }
+
+    /* ===== BOOKING MODAL ===== */
+    var modal = document.getElementById('booking-modal');
+    var modalPanel = modal.querySelector('.modal-panel');
+    var modalCloseBtn = modal.querySelector('.modal-close');
+    var triggers = document.querySelectorAll('.modal-trigger');
+    var lastFocusedEl = null;
+    var selectedService = null;
+    var selectedDate = null;
+    var selectedTime = null;
+    var previousDuration = null;
+
+    function resetModal() {
+      selectedService = null; selectedDate = null; selectedTime = null; previousDuration = null;
+      showStep(1);
+      document.querySelectorAll('.service-opt').forEach(function(o) {
+        o.setAttribute('aria-checked', 'false');
+      });
+      document.getElementById('booking-date').value = '';
+      document.getElementById('time-grid').innerHTML = '';
+      document.getElementById('step1-next').disabled = true;
+      document.getElementById('step2-next').disabled = true;
+    }
+
+    function openModal() {
+      lastFocusedEl = document.activeElement;
+      resetModal();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      mainContent.setAttribute('inert', '');
+      nav.setAttribute('inert', '');
+      footer.setAttribute('inert', '');
+      // Focus first step title
+      var title = document.querySelector('#step-1 .modal-step-title');
+      if (title) title.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      mainContent.removeAttribute('inert');
+      nav.removeAttribute('inert');
+      footer.removeAttribute('inert');
+      if (lastFocusedEl) lastFocusedEl.focus();
+    }
+
+    triggers.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (mobileMenu.classList.contains('open')) closeMenu();
+        openModal();
+      });
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // Focus trap
+    modal.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab') return;
+      var focusable = modalPanel.querySelectorAll('button:not([disabled]), input, [tabindex="0"]');
+      var arr = Array.from(focusable);
+      if (arr.length === 0) return;
+      var first = arr[0], last = arr[arr.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
+
+    /* Steps */
+    function showStep(n) {
+      document.querySelectorAll('.modal-step').forEach(function(s) {
+        s.classList.toggle('active', parseInt(s.getAttribute('data-step')) === n);
+      });
+      var title = document.querySelector('#step-' + n + ' .modal-step-title');
+      if (title) setTimeout(function() { title.focus(); }, 50);
+    }
+
+    /* Radio group helper */
+    function initRadioGroup(container, onSelect) {
+      container.addEventListener('click', function(e) {
+        var opt = e.target.closest('[role="radio"]');
+        if (!opt || opt.getAttribute('aria-disabled') === 'true') return;
+        container.querySelectorAll('[role="radio"]').forEach(function(r) {
+          r.setAttribute('aria-checked', 'false');
+          r.setAttribute('tabindex', '-1');
+        });
+        opt.setAttribute('aria-checked', 'true');
+        opt.setAttribute('tabindex', '0');
+        opt.focus();
+        if (onSelect) onSelect(opt);
+      });
+      container.addEventListener('keydown', function(e) {
+        if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+        e.preventDefault();
+        var items = Array.from(container.querySelectorAll('[role="radio"]:not([aria-disabled="true"])'));
+        var idx = items.indexOf(document.activeElement);
+        if (idx === -1) return;
+        var next = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? (idx + 1) % items.length : (idx - 1 + items.length) % items.length;
+        items.forEach(function(r) { r.setAttribute('aria-checked', 'false'); r.setAttribute('tabindex', '-1'); });
+        items[next].setAttribute('aria-checked', 'true');
+        items[next].setAttribute('tabindex', '0');
+        items[next].focus();
+        if (onSelect) onSelect(items[next]);
       });
     }
+
+    /* Step 1: Service */
+    initRadioGroup(document.getElementById('service-radiogroup'), function(opt) {
+      selectedService = {
+        key: opt.getAttribute('data-service'),
+        price: opt.getAttribute('data-price'),
+        duration: parseInt(opt.getAttribute('data-duration'))
+      };
+      document.getElementById('step1-next').disabled = false;
+
+      // If duration changed, regenerate time slots if date is already selected
+      if (previousDuration !== null && previousDuration !== selectedService.duration && selectedDate) {
+        selectedTime = null;
+        document.getElementById('step2-next').disabled = true;
+        generateTimeSlots();
+      }
+      previousDuration = selectedService.duration;
+    });
+
+    document.getElementById('step1-next').addEventListener('click', function() {
+      if (!selectedService) return;
+      showStep(2);
+      setupDateInput();
+    });
+
+    /* Step 2: Date & time */
+    function getLocalToday() {
+      var now = new Date();
+      return { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate(), hours: now.getHours(), minutes: now.getMinutes() };
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function setupDateInput() {
+      var today = getLocalToday();
+      var todayStr = today.year + '-' + pad(today.month) + '-' + pad(today.day);
+      var maxDate = new Date(today.year, today.month - 1, today.day + 30);
+      var maxStr = maxDate.getFullYear() + '-' + pad(maxDate.getMonth() + 1) + '-' + pad(maxDate.getDate());
+      var dateInput = document.getElementById('booking-date');
+      dateInput.setAttribute('min', todayStr);
+      dateInput.setAttribute('max', maxStr);
+      if (!dateInput.value) dateInput.value = todayStr;
+      selectedDate = dateInput.value;
+      generateTimeSlots();
+    }
+
+    var dateInput = document.getElementById('booking-date');
+    dateInput.addEventListener('change', function() {
+      selectedDate = this.value;
+      selectedTime = null;
+      document.getElementById('step2-next').disabled = true;
+      generateTimeSlots();
+    });
+
+    // Init time grid radio group ONCE (event delegation handles dynamic children)
+    var timeGrid = document.getElementById('time-grid');
+    initRadioGroup(timeGrid, function(opt) {
+      selectedTime = opt.getAttribute('data-time');
+      document.getElementById('step2-next').disabled = false;
+    });
+
+    function generateTimeSlots() {
+      var t = T[currentLang];
+      timeGrid.innerHTML = '';
+      if (!selectedDate) return;
+
+      // Parse date components safely
+      var parts = selectedDate.split('-');
+      var selYear = parseInt(parts[0]);
+      var selMonth = parseInt(parts[1]);
+      var selDay = parseInt(parts[2]);
+      var dateObj = new Date(selYear, selMonth - 1, selDay);
+
+      // Sunday check
+      if (dateObj.getDay() === 0) {
+        timeGrid.innerHTML = '<p class="time-msg">' + t.sundayMsg + '</p>';
+        return;
+      }
+
+      // Compute latest start time based on service duration
+      var serviceDuration = selectedService ? selectedService.duration : 30;
+      var closingMinutes = 20 * 60; // 20:00
+      var latestStartMinutes = closingMinutes - serviceDuration;
+      // Round down to nearest 30-minute slot
+      latestStartMinutes = Math.floor(latestStartMinutes / 30) * 30;
+
+      // Check if today
+      var today = getLocalToday();
+      var isToday = (selYear === today.year && selMonth === today.month && selDay === today.day);
+      var nowMinutes = today.hours * 60 + today.minutes;
+
+      var hasSlots = false;
+      for (var h = 10; h < 20; h++) {
+        for (var m = 0; m < 60; m += 30) {
+          var slotMinutes = h * 60 + m;
+          if (slotMinutes > latestStartMinutes) continue;
+          if (isToday && slotMinutes <= nowMinutes + 30) continue;
+          hasSlots = true;
+          var timeStr = pad(h) + ':' + pad(m);
+          var btn = document.createElement('button');
+          btn.className = 'time-slot';
+          btn.setAttribute('role', 'radio');
+          btn.setAttribute('aria-checked', selectedTime === timeStr ? 'true' : 'false');
+          btn.setAttribute('tabindex', selectedTime === timeStr ? '0' : '-1');
+          btn.setAttribute('data-time', timeStr);
+          btn.textContent = timeStr;
+          timeGrid.appendChild(btn);
+        }
+      }
+
+      if (!hasSlots) {
+        timeGrid.innerHTML = '<p class="time-msg">' + t.noSlots + '</p>';
+        document.getElementById('step2-next').disabled = true;
+      } else {
+        // Set first slot as tabbable if no selection
+        if (!selectedTime || !timeGrid.querySelector('[data-time="' + selectedTime + '"]')) {
+          selectedTime = null;
+          document.getElementById('step2-next').disabled = true;
+          var firstSlot = timeGrid.querySelector('.time-slot');
+          if (firstSlot) firstSlot.setAttribute('tabindex', '0');
+        }
+      }
+    }
+
+    document.getElementById('step2-back').addEventListener('click', function() { showStep(1); });
+    document.getElementById('step2-next').addEventListener('click', function() {
+      if (!selectedDate || !selectedTime) return;
+      updateConfirmation();
+      showStep(3);
+    });
+
+    /* Step 3: Confirm */
+    function updateConfirmation() {
+      var t = T[currentLang];
+      var names = t.serviceNames;
+      document.getElementById('confirm-service').textContent = names[selectedService.key] || selectedService.key;
+      document.getElementById('confirm-price').textContent = '\u20ac' + selectedService.price;
+      document.getElementById('confirm-time').textContent = selectedTime;
+
+      // Format date in the current language
+      var parts = selectedDate.split('-');
+      var dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      var locale = currentLang === 'zh' ? 'zh-CN' : currentLang === 'es' ? 'es-ES' : 'en-GB';
+      var formatted = dateObj.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('confirm-date').textContent = formatted;
+    }
+
+    document.getElementById('step3-back').addEventListener('click', function() { showStep(2); });
+    document.getElementById('step3-close').addEventListener('click', closeModal);
+
+    /* ===== INIT LANGUAGE ===== */
+    var saved = localStorage.getItem('corte-madrid-lang');
+    var initLang = (saved && T[saved]) ? saved : 'es';
+    applyLanguage(initLang);
 
   })();
   </script>
